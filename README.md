@@ -1,0 +1,3 @@
+# Mafia Game
+
+## Getting Started
