@@ -1,15 +1,14 @@
 import React from 'react';
-import socketIOClient from 'socket.io-client';
-const ENDPOINT = 'http://127.0.0.1:4001';
+import { SocketContext } from './SocketProvider';
 
 const App = () => {
-  const [socket, setSocket] = React.useState(null);
+  const { socket } = React.useContext(SocketContext);
   const [currentPlayers, setCurrentPlayers] = React.useState([]);
   const [card, setCard] = React.useState(null);
 
   React.useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-    setSocket(socket);
+    if (!socket) return;
+
     socket.on('currentPlayers', (data) => {
       console.log(data);
       setCurrentPlayers(data);
@@ -21,9 +20,7 @@ const App = () => {
       console.log(data);
       setCard(data);
     });
-  }, []);
-
-  React.useEffect(() => {}, [currentPlayers]);
+  }, [socket]);
 
   const shuffle = () => {
     socket.emit('shuffle');
