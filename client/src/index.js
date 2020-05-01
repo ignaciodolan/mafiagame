@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import SocketProvider from './SocketProvider';
@@ -7,9 +8,11 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SocketProvider>
-      <App />
-    </SocketProvider>
+    <Router>
+      <SocketProvider>
+        <App />
+      </SocketProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
