@@ -1,0 +1,15 @@
+:root {
+  --default-color: #1e252f;
+  --secondary-color: #21d39a;
+  --semiwhite-color: #effeff;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+#root {
+  background-color: var(--default-color);
+  height: 100%;
+}

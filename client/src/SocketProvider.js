@@ -4,7 +4,7 @@ import socketIOClient from 'socket.io-client';
 
 const ENDPOINT = Config.SOCKET_URL || 'http://127.0.0.1:4001';
 export const SocketContext = React.createContext();
-
+console.log(Config.SOCKET_URL);
 const SocketProvider = ({ children }) => {
   const [socket, setSocket] = React.useState(null);
 
