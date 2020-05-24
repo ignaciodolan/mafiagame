@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { SocketContext } from './SocketProvider';
-import generateRandomString from './helpers/generateRandomString';
+import { SocketContext } from '../SocketProvider';
+import generateRandomString from '../helpers/generateRandomString';
 import {
   Header,
   Button,

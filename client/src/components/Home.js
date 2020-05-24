@@ -1,5 +1,5 @@
 import React from 'react';
-import generateRandomString from './helpers/generateRandomString';
+import generateRandomString from '../helpers/generateRandomString';
 import {
   Header,
   Section,

@@ -40,8 +40,14 @@ const CreateGame = styled(Button)`
 const LeftImage = styled.img`
   position: absolute;
   width: 250px;
-  top: 30px;
-  left: 0;
+  top: -50px;
+  left: -50px;
+  z-index: 10;
+`;
+const RightImage = styled.img`
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
   z-index: 10;
 `;
 const ArrowRight = styled.img`
@@ -52,12 +58,6 @@ const ArrowRight = styled.img`
   position: absolute;
   top: -15px;
   left: 220px;
-`;
-const RightImage = styled.img`
-  position: absolute;
-  top: 245px;
-  right: 0;
-  z-index: 10;
 `;
 const FloatingTitle = styled.span`
   position: absolute;
@@ -79,6 +79,7 @@ const Paragraph = styled.p`
   color: var(--default-color);
 `;
 const Main = styled.main`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
