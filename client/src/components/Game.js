@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { SocketContext } from '../SocketProvider';
+import { useSocket } from '../providers/SocketProvider';
 import generateRandomString from '../helpers/generateRandomString';
 import {
   Header,
@@ -21,7 +21,7 @@ const useQuery = () => {
 };
 
 const Game = () => {
-  const { socket, registerEvents } = React.useContext(SocketContext);
+  const { socket, registerEvents } = useSocket();
   const query = useQuery();
   const gameRoom = query.get('id');
   const [currentPlayers, setCurrentPlayers] = React.useState([]);

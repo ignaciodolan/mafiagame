@@ -3,6 +3,9 @@ import styled from 'styled-components';
 const Header = styled.header`
   position: relative;
   margin: 0 3rem;
+  @media (max-width: 576px) {
+    margin: 0 1rem;
+  }
 `;
 
 const Section = styled.section`
@@ -43,12 +46,18 @@ const LeftImage = styled.img`
   top: -50px;
   left: -50px;
   z-index: 10;
+  @media (max-width: 576px) {
+    display: none;
+  }
 `;
 const RightImage = styled.img`
   position: absolute;
   bottom: -50px;
   right: -50px;
   z-index: 10;
+  @media (max-width: 576px) {
+    display: none;
+  }
 `;
 const ArrowRight = styled.img`
   width: 100px;
@@ -65,6 +74,12 @@ const FloatingTitle = styled.span`
   margin-bottom: -1rem;
   font-size: 3em;
   color: var(--secondary-color);
+
+  @media (max-width: 576px) {
+    font-size: 1em;
+    line-height: 0.8;
+    margin: 0;
+  }
 `;
 const FloatingTitleLeft = styled(FloatingTitle)`
   left: 0px;
@@ -89,6 +104,11 @@ const Main = styled.main`
   background-color: var(--secondary-color);
   color: var(--default-color);
   height: 100%;
+
+  @media (max-width: 576px) {
+    margin: 3rem 1rem;
+    overflow: hidden;
+  }
 `;
 const Container = styled.div`
   display: flex;
