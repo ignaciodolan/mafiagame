@@ -2,7 +2,7 @@ const shuffle = require('./helpers/shuffle');
 
 const CARDS = ['POLICE', 'DOCTOR', 'GOD', 'THIEF', 'CITIZEN'];
 const ROOMS = [{ id: '6gEmrsD3', players: [] }];
-const MINIMUM_AMOUNT_PLAYERS = 6;
+const MINIMUM_AMOUNT_PLAYERS = 1;
 
 const setupGame = (io, socket) => {
   const sendMessageToAllMembers = ({ roomId, event, data }) => {
@@ -41,25 +41,43 @@ const setupGame = (io, socket) => {
     }
   };
 
-  const joinGame = (socket, id) => {
-    const game = ROOMS.find((room) => room.id === id);
-
-    if (!game) {
-      console.log("Room doesn't exist", id);
+  const joinGame = (socket, gameId, userId, name) => {
+    if (!gameId) {
+      console.log('Err', gameId);
       return;
     }
 
+    let game = ROOMS.find((room) => room.id === gameId);
+
+    if (!game) {
+      console.log("Room doesn't exist, creating", gameId);
+      game = { id: gameId, players: [] };
+      ROOMS.push(game);
+    }
+
     // only add to the game if it exists
-    const alreadyExistInGame = game.players.find(
-      (player) => player.id === socket.id
+    const playerIndex = game.players.findIndex(
+      (player) => player.userId === userId
     );
 
-    if (!alreadyExistInGame) {
+    // if player exists we need to refresh the socket id saved
+    if (playerIndex > -1) {
+      console.log('socketid', socket.id);
+      const players = game.players.map((player) => {
+        if (player.userId === userId) {
+          player.id = socket.id;
+        }
+        return player;
+      });
+      game.players = [...players];
+    } else {
+      // If player index does not exist is new, lets add it to the list
       console.log('a user joined a game: ', game.id);
       socket.join(game.id);
       const newPlayer = {
         id: socket.id,
-        name: `user-${socket.id}`,
+        userId: userId,
+        name: name || `Anonymous-${game.players.length}`,
       };
       game.players.push(newPlayer);
 
@@ -102,7 +120,9 @@ const setupGame = (io, socket) => {
   };
 
   console.log('a user connected');
-  socket.on('join', (gameId) => joinGame(socket, gameId));
+  socket.on('join', ({ gameRoom, userId, name }) =>
+    joinGame(socket, gameRoom, userId, name)
+  );
   socket.on('shuffle', (roomId) => dealCards(roomId));
   socket.on('disconnect', removeUserFromGameRoom);
 };
