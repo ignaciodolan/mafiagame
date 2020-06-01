@@ -47,6 +47,7 @@ const Home = () => {
                 type="hidden"
                 value={generateRandomString()}
               />
+              <input name="type" type="hidden" value="new" />
               <CreateGame type="submit">Create a game</CreateGame>
             </form>
           </Container>

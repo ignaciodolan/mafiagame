@@ -39,6 +39,11 @@ const CreateGame = styled(Button)`
   width: 12rem;
   font-size: 1.25rem;
 `;
+const ShuffleButton = styled(Button)`
+  height: 4rem;
+  width: 12rem;
+  font-size: 1.25rem;
+`;
 
 const LeftImage = styled.img`
   position: absolute;
@@ -115,6 +120,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  flex-direction: ${({ column }) => (column ? 'column' : 'row')};
 `;
 const Input = styled.input`
   font-size: 1.25rem;
@@ -131,6 +137,9 @@ const Input = styled.input`
   }
 `;
 
+const UnorderedList = styled.ul`
+  list-style: none;
+`;
 export {
   Header,
   Section,
@@ -138,8 +147,10 @@ export {
   Button,
   JoinGame,
   CreateGame,
+  ShuffleButton,
   Main,
   Container,
+  UnorderedList,
   Input,
   RightImage,
   LeftImage,
